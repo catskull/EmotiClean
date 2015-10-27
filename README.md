@@ -1,3 +1,4 @@
+![icon](icon.png)
 # EmotiClean
 
 A Chrome extension to replace bad words with emoji!
