@@ -1,7 +1,7 @@
 function begin() {
 	// Set default values
 	if (!localStorage.wordList) {
-		localStorage.wordList = "asshole,bitch,cock,cunt,damn,fuck,piss,slut,shit,tits,whore";
+		localStorage.wordList = "bitch,cock,cunt,damn,fuck,piss,slut,shit,tits,whore,dick,pussy,fag,bastard,douche,doosh,asshole,bloody,bollocks,arsehole";
 	}
 
 	// Handle Message Passing for localStorage
