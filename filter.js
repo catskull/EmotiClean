@@ -10,7 +10,7 @@ port.postMessage({localStorage: "filterSubstring"});
 port.onMessage.addListener(function(msg) {
   if (msg.wordList) {
 	wordList = msg.wordList.split(",");
-    emojiList = ["🐴⚫","🐩","🐓","©️","🌊","👉👌","⛲","💃","💩","🌀🌀","💃","👋"];
+    emojiList = ["🐩","🐓","©️","🌊","💏","⛲","💃","💩","🌀🌀","💃","🌭","🚺","👬","🙇","😈","😈","🐴🕳","💉","🎱","🐴🕳", "  jdkfjd "];
 	generateProfanityList();
 	removeProfanity();
 	readyWordList = true;
@@ -68,8 +68,9 @@ function removeProfanityFromNode(event) {
 // Replace the profanity with an emoji
 function emojiReplace(strMatchingString, strFirstLetter) {
 	var starString = "";
+  var index = wordList.indexOf(strMatchingString.toLowerCase());
 
-    starString = emojiList[wordList.indexOf(strMatchingString)];
+  starString = emojiList[index];
 
 	return starString;
 }
