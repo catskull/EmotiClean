@@ -2,23 +2,40 @@ var wordList;
 var emojiList;
 var readyWordList = false;
 var profanityList = [];
+var storedWhitelist;
 
 // Retrieve the localStorage from background page
 var port = chrome.extension.connect({name: "getLocalStorage"});
+
 port.postMessage({localStorage: "wordList"});
 port.postMessage({localStorage: "filterSubstring"});
 port.onMessage.addListener(function(msg) {
-  if (msg.wordList) {
-	wordList = msg.wordList.split(",");
-    emojiList = ["🐩","🐓","©️","🌊","💏","⛲","💃","💩","🌀🌀","💃","🌭","🚺","👬","🙇","😈","😈","🐴🕳","💉","🎱","🐴🕳", "  jdkfjd "];
-	generateProfanityList();
-	removeProfanity();
-	readyWordList = true;
+  if (msg.url){
+    console.log(msg);
+    debugger;
+    if (msg.wordList) {
+    	wordList = msg.wordList.split(",");
+        emojiList = ["🐩","🐓","©️","🌊","💏","⛲","💃","💩","🌀🌀","💃","🌭","🚺","👬","🙇","😈","😈","🐴🕳","💉","🎱","🐴🕳", "  jdkfjd "];
+    	generateProfanityList();
+    	removeProfanity();
+    	readyWordList = true;
+    }
   }
 });
 
 // When DOM is modified, remove profanity from inserted node
 document.addEventListener('DOMNodeInserted', removeProfanityFromNode, false);
+
+function getWhiteList() {
+  storedWhitelist = localStorage.getItem("whitelist");
+
+  if (!storedWhitelist) {
+    storedWhitelist = [];
+  }
+  else {
+    storedWhitelist = JSON.parse(storedWhitelist);
+  }
+}
 
 // Parse the profanity list
 function generateProfanityList() {
@@ -29,7 +46,7 @@ function generateProfanityList() {
 
 // Remove the profanity from the document
 function removeProfanity() {
-	var evalResult = document.evaluate(
+  var evalResult = document.evaluate(
 		'.//text()[normalize-space(.) != ""]',
 		document,
 		null,

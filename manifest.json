@@ -9,6 +9,7 @@
 		"page": "background.html",
 		"persistent": false
 	},
+	"options_page": "options.html",
 	"content_scripts": [
 		{
 		"matches": ["http://*/*", "https://*/*"],
@@ -18,6 +19,7 @@
 		}
 	],
 	"permissions": [
-		"tabs"
+		"tabs",
+		"storage"
 	]
 }
